@@ -1,0 +1,110 @@
+.progressContainer {
+    position: relative;
+    width: 300px;
+    height: 100vh;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 2rem;
+    color: #fff;
+    background: #392A60;
+    -moz-box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .progress {
+    position: relative;
+    padding: 0 1rem 0 3.5rem;
+    margin: 2rem 0 0;
+    list-style: none;
+  }
+  
+  .progress__item {
+    position: relative;
+    min-height: 75px;
+    counter-increment: list;
+    padding-left: 0.5rem;
+  }
+  .progress__item:before {
+    content: "";
+    position: absolute;
+    left: -1.5rem;
+    top: 33px;
+    height: 60%;
+    width: 1px;
+    border-left: 1px solid #fff;
+  }
+  .progress__item:after {
+    content: counter(list);
+    position: absolute;
+    top: 0;
+    left: -2.5rem;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: transparent;
+    color: #fff;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 2rem;
+    text-align: center;
+    border: 1px solid #fff;
+  }
+  .progress__item:last-child:before {
+    border: none;
+  }
+  .progress__item.progress__item--completed {
+    opacity: 0.6;
+    color: #fff;
+  }
+  .progress__item.progress__item--completed:after {
+    content: "\2713";
+    font-weight: 400;
+    background: #fff;
+    color: #392A60;
+  }
+  .progress__item.progress__item--active:after {
+    background: #fff;
+    color: #392A60;
+  }
+  
+  .progress__title {
+    padding: 0.4rem 0 0.5rem;
+    margin: 0;
+    font-size: 1.5rem;
+    color:black
+  }
+  
+  .progress__info {
+    font-size: 13px;
+  }
+
+  .status {
+    margin: auto;
+    margin-top: 20px;
+    color: blue;
+    padding: 17px;
+}
+
+.status__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.status__top h2 span {
+    color: black;
+}
+
+.status__top p {
+    text-align: center;
+}
+
+
+.status_wraper {
+    background: white;
+    padding: 10px;
+    /* height: 50vh; */
+    margin-top: 20px;
+    margin: auto;
+}
