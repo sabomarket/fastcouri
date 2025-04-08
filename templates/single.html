@@ -1,0 +1,161 @@
+<body>
+    <!-- Topbar Start -->
+<div class="container-fluid bg-dark">
+<div class="row py-2 px-lg-5">
+   <div class="col-lg-6 text-center text-lg-left mb-2 mb-lg-0">
+       <div class="d-inline-flex align-items-center text-white">
+           <small><i class="fa fa-phone-alt mr-2"></i>+012 345 6789</small>
+           <small class="px-3">|</small>
+           <small><i class="fa fa-envelope mr-2"></i>info@example.com</small>
+       </div>
+   </div>
+   <div class="col-lg-6 text-center text-lg-right">
+       <div class="d-inline-flex align-items-center">
+           <a class="text-white px-2" href="">
+               <i class="fab fa-facebook-f"></i>
+           </a>
+           <a class="text-white px-2" href="">
+               <i class="fab fa-twitter"></i>
+           </a>
+           <a class="text-white px-2" href="">
+               <i class="fab fa-linkedin-in"></i>
+           </a>
+           <a class="text-white px-2" href="">
+               <i class="fab fa-instagram"></i>
+           </a>
+           <a class="text-white pl-2" href="">
+               <i class="fab fa-youtube"></i>
+           </a>
+       </div>
+   </div>
+</div>
+</div>
+<!-- Topbar End -->
+
+<!-- Navbar Start -->
+<div class="container-fluid p-0">
+<nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-lg-5">
+   <a href="{% url 'index' %}" class="navbar-brand ml-lg-3">
+       <h1 class="m-0 display-5 text-uppercase text-primary"><i class="fa fa-truck mr-2"></i>Faster Logistics</h1>
+   </a>
+   <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+       <span class="navbar-toggler-icon"></span>
+   </button>
+   <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
+       <div class="navbar-nav m-auto py-0">
+           <a href="{% url 'index' %}" class="nav-item nav-link">Home</a>
+           <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
+           <a href="{% url 'service' %}" class="nav-item nav-link">Service</a>
+           <a href="{% url 'blog' %}" class="nav-item nav-link">Blog</a>
+       
+           <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
+       </div>
+       <a href="{% url 'receipts' %}" class="navbar-brand ml-lg-3">
+           <img class="img-fluid w-100"  style="max-width: 30px; max-height:30px;
+           margin: 0 auto;
+           border-radius: 50%;" src="{% static 'img/recipts.svg' %}" alt="">
+       </a>
+       <li class="d-flex align-items-center"><h4>Hello {{request.user.username}} </h4><br>
+           <h5 class=" pl-5"> <a href="{% url 'index' %}"> Logout</a></h5>
+       </li>
+       {% comment %} <a href="" class="btn btn-primary py-2 px-4 d-none d-lg-block">Get A Quote</a> {% endcomment %}
+   </div>
+</nav>
+</div>
+<!-- Navbar End -->
+{% comment %} <img src="{% static 'img/about.jpg' %}" style="width: 100%; 
+height: 400px;
+object-fit: cover; 
+background-position: center; 
+background-size: cover;" alt=""> {% endcomment %}
+
+<center> <h3>Package </h3></center>
+
+<div class="card mb-3" style="margin: auto; width: 75%;">
+   {% comment %} <img src="{% static 'img/feature.jpg' %}" class="card-img-top "  style="width: 100%; 
+   height: 400px;
+   object-fit: cover; 
+   background-position: center; 
+   background-size: cover;"
+    alt="ball" > {% endcomment %}
+
+    <div class="full__body">
+
+       <header>
+           <div class="status">
+               <div class="status_wraper">
+                   <div class="status__top">
+                       <h2><span>ORDER</span> {{request.user.product.order}}</h2>
+                       <div>
+                           <p>Expected Arrival of {{request.user.product.expected_arrival}}</p>
+                           <p>USPS {{request.user.product.usps}}</p>
+                       </div>
+                   </div>
+                   <ul class="progress">
+                       <li class="progress__item progress__item--completed">
+                         <p class="progress__title">{{request.user.tracking.first_step}}</p>
+                       </li>
+                       <li class="progress__item progress__item--active">
+                         <p class="progress__title">{{request.user.tracking.second_step}}</p>
+                       </li>
+                       <li class="progress__item">
+                         <p class="progress__title">{{request.user.tracking.third_step}}</p>
+                       </li>
+                       <li class="progress__item">
+                           <p class="progress__title">{{request.user.tracking.fourth_step}}</p>
+                           <p class="progress__info">{{request.user.step4.info}}</p>
+                           <p class="progress__info">{{request.user.step4.location}}</p>
+                           <p class="progress__info">{{request.user.step4.date}}</p>
+                         </li>
+                         <li class="progress__item">
+                           <p class="progress__title">{{request.user.tracking.fifth_step}}</p>
+                           <p class="progress__info">{{request.user.step5.info}}</p>
+                           <p class="progress__info">{{request.user.step5.location}}</p>
+                           <p class="progress__info">{{request.user.step5.date}}</p>
+
+                         </li>
+
+                         <li class="progress__item">
+                           <p class="progress__title">{{request.user.tracking.sixth_step}}</p>
+                           <p class="progress__info">{{request.user.step6.arrived}}</p>
+                         </li>
+                   </ul>
+               </div>
+       </header>
+   </div>
+   <div class="card-body mx-5" style="display: flex ; justify-content: space-evenly; align-items: center; flex-wrap: wrap; text-align: center;">
+     <h5 class="card-title">Destination: {{request.user.product.destination}}</h5>
+     <h5 class="card-text">Delivery: {{request.user.product.delivery}} <i class="fa-solid fa-ship"></i></h5>
+     <h5>Package: <img src="{{request.user.product.profile_pic.url}}" style="width: 30%;" alt=""></h5>
+     <h5>Package Name: {{request.user.product.package_name}}</h5>
+   </div><div class="card-body mx-5" style="display: flex ; justify-content: space-evenly; align-items: center; flex-wrap: wrap; text-align: center;">
+       <h5 class="card-title">Order Date: {{request.user.product.order_date}}</h5>
+       <h5 class="card-title">Delivery Date: {{request.user.product.delivery_date}}</h5>
+       <h5 class="card-text">To {{request.user.product.reciever_name}}</h5>
+       <h5>Status: {{request.user.product.status}}</h5>
+     </div>
+ </div>
+ 
+
+
+<a href="#" class="btn btn-lg btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+<div class="gtranslate_wrapper"></div>
+<script>window.gtranslateSettings = {"default_language":"en","native_language_names":true,"detect_browser_language":true,"wrapper_selector":".gtranslate_wrapper","alt_flags":{"en":"usa","pt":"brazil","es":"argentina","fr":"quebec"}}</script>
+<script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
+<!-- JavaScript Libraries -->
+<script src="https://kit.fontawesome.com/14bfa6f5f3.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="{% static 'lib/easing/easing.min.js' %}"></script>
+<script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+<script src="{% static 'lib/counterup/counterup.min.js' %}"></script>
+<script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
+<!-- Contact Javascript File -->
+<script src="{% static 'mail/jqBootstrapValidation.min.js' %}"></script>
+<script src="{% static 'mail/contact.js' %}"></script>
+
+<!-- Template Javascript -->
+<script src="{% static 'js/main.js' %}"></script>
+</body>

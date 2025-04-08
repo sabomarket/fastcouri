@@ -1,0 +1,348 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Fast Courier </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+
+
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.css'><link rel="stylesheet" href="{% static 'css/receipts.css' %}">
+
+
+</head>
+<body>
+
+<!-- partial:index.partial.html -->
+<div class="container invoice">
+  <div class="invoice-header">
+    <div class="ui left aligned grid">
+      <div class="row">
+        <div class="left floated left aligned six wide column">
+          <div class="ui">
+            <h1 class = "ui header pageTitle">Invoice <small class = "ui sub header">With Credit</small></h1>
+            <h4 class="ui sub header invDetails">NO: {{request.user.product.order}} | Order Date: {{request.user.product.order_date}}</h4>
+          </div>
+        </div>
+        <div class="right floated left aligned six wide column">
+          <div class="ui">
+            <div class="column two wide right floated">
+              <ul class="">
+                  <img src="{% static 'img/barcode.jpg' %}" width="180" height="60">
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ui segment cards">
+    <div class="ui card">
+      <div class="content">
+        <div class="header">Sender Details</div>
+      </div>
+      <div class="content">
+        <ul>
+          <li> <strong>  {{user.first_name}} {{user.last_name}}</strong> </li>
+          <li><strong>  </strong> {{request.user.customer.address}}</li>
+          <li><strong>  </strong> {{request.user.customer.phone_number}}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ui card customercard">
+      <div class="content">
+        <div class="header">Reciever Details</div>
+      </div>
+      <div class="content">
+        <ul>
+          <li> <strong>  {{request.user.product.reciever_name}} </strong> </li>
+          <li><strong>  </strong> {{request.user.product.address}}</li>
+          <li><strong>  </strong> {{request.user.product.phone_number}}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ui segment itemscard">
+      <div class="content">
+        <h1 style="font-size: medium;">Shipment Information</h1>
+        <table class="ui celled table">
+          <thead>
+            <tr>
+              <th class="text-center colfix">Orgin</th>
+              <th>Package / Details</th>
+
+              <th class="text-center colfix">status</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+               Package Name
+                <br>
+                <span class="mono">{{request.user.product.origin}}</span>
+              </td>
+              <td class="text-right">
+                
+                <small class="text-muted">{{request.user.product.package_name}}</small>
+              </td>
+              <td class="text-right">
+                <span class="mono">{{request.user.product.status}}</span>
+              </td>
+            </tr>
+
+          </tbody>
+         <tfoot class="full-width">
+  </tfoot>
+        </table>
+
+        <table class="ui celled table">
+          <thead>
+            <tr>
+              <th class="text-center colfix">Destination</th>
+              <th>Carrier</th>
+
+              <th class="text-center colfix">Type Of Shippment</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+
+                <br>
+                <span class="mono">{{request.user.product.destination}}</span>
+              </td>
+              <td class="text-right">
+                
+                <small class="text-muted">Fast Courier</small>
+              </td>
+              <td class="text-right">
+                <span class="mono">{{request.user.product.delivery}}</span>
+              </td>
+            </tr>
+
+          </tbody>
+         <tfoot class="full-width">
+  </tfoot>
+        </table>
+
+        <table class="ui celled table">
+          <thead>
+            <tr>
+              <th class="text-center colfix">Weight</th>
+              <th>Shipping Mode</th>
+
+              <th class="text-center colfix">Carrier Reference No</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+
+                <br>
+                <span class="mono">{{request.user.product.weight}}Kg</span>
+              </td>
+              <td class="text-right">
+                
+                <small class="text-muted">{{request.user.product.delivery}}</small>
+              </td>
+              <td class="text-right">
+                <span class="mono">{{request.user.product.carrier_reference_number}}</span>
+              </td>
+            </tr>
+
+          </tbody>
+         <tfoot class="full-width">
+  </tfoot>
+        </table>
+
+        <table class="ui celled table">
+          <thead>
+            <tr>
+              <th class="text-center colfix">Product</th>
+              <th>Qty</th>
+
+              <th class="text-center colfix">Payment Mode</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+
+                <br>
+                <span class="mono">Percel</span>
+              </td>
+              <td class="text-right">
+                
+                <small class="text-muted">{{request.user.product.quanity}}</small>
+              </td>
+              <td class="text-right">
+                <span class="mono">{{request.user.product.method_of_payment}}</span>
+              </td>
+            </tr>
+
+          </tbody>
+         <tfoot class="full-width">
+  </tfoot>
+        </table>
+
+        <table class="ui celled table">
+          <thead>
+            <tr>
+              <th class="text-center colfix">Total Fregiht</th>
+              <th>Expected Delivery Date</th>
+
+              <th class="text-center colfix">Departure Time</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+
+                <br>
+                <span class="mono">{{request.user.product.quanity}}</span>
+              </td>
+              <td class="text-right">
+                
+                <small class="text-muted">{{request.user.product.delivery_date}}</small>
+              </td>
+              <td class="text-right">
+                <span class="mono">{{request.user.product.depature_time}}</span>
+              </td>
+            </tr>
+
+          </tbody>
+         <tfoot class="full-width">
+  </tfoot>
+        </table>
+        
+        <table class="ui celled table">
+          <thead>
+            <tr>
+              <th class="text-center colfix">Pick Up Date</th>
+              <th>Pick Up Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+
+                <br>
+                <span class="mono">{{request.user.product.pick_up_date}}</span>
+              </td>
+              <td class="text-right">
+                
+                <small class="text-muted">{{request.user.product.pick_up_time}}</small>
+              </td>
+            </tr>
+
+          </tbody>
+         <tfoot class="full-width">
+  </tfoot>
+        </table>
+<h1 style="font-size: medium;">Comment:</h1>
+<p>We are here to serve you better</p>
+      </div>
+    </div>
+
+    <div class="ui segment itemscard">
+      <div class="content">
+        <h1 style="font-size: medium;">Shipment History</h1>
+        <table class="ui celled table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th class="text-center colfix">Time</th>
+              <th class="text-center colfix">Location</th>
+              <th class="text-center colfix">Status</th>
+              <th class="text-center colfix">Updated By</th>
+              <th class="text-center colfix">Remark</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+               Package Name
+                <br>
+                <small class="text-muted">{{request.user.product.delivery_date}}</small>
+              </td>
+              <td class="text-right">
+                <span class="mono">Time</span>
+              </td>
+              <td class="text-right">
+                <span class="mono">{{request.user.product.destination}}</span>
+              </td>
+              <td class="text-right">
+                <span class="mono">{{request.user.product.status}}</span>
+
+              </td>
+              <td class="text-right">
+                <span class="mono">Fast Courier </span>
+
+              </td>
+              <td class="text-right">
+                <span class="mono">We are here to serve you better</span>
+
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                X-Ray Scan Result	
+                <br>
+                <small class="text-muted">Non-Hardful Content (Negative)</small>
+              </td>
+
+          </tbody>
+         <tfoot class="full-width">
+  </tfoot>
+        </table>
+
+      </div>
+    </div>
+
+
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script type="text/javascript">
+    window.addEventListener('load', function() {
+        // Wait for the page to load completely
+        setTimeout(function() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Use jsPDF's .html method to convert the body content to PDF
+            doc.html(document.body, {
+                callback: function (doc) {
+                    // Save the generated PDF file
+                    doc.save('generated-page.pdf');
+                },
+                margin: [10, 10, 10, 10],  // Adjust margins for the PDF
+                x: 10,  // Horizontal position
+                y: 10   // Vertical position
+            });
+        }, 3000); // Delay to ensure the content is fully loaded
+    });
+</script>
+
+
+
+<script type="text/javascript">
+  window.addEventListener('load', function() {
+      // Ensure the page is fully loaded, including all styles and images
+      setTimeout(function() {
+          window.print(); // Trigger the print dialog
+      }, 3000); // 1 second delay to ensure content is loaded
+  });
+</script>
+
+</body>
+</html>
